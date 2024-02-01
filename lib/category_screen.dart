@@ -42,10 +42,26 @@ class _CategoryScreenState extends State<CategoryScreen> {
         itemBuilder: (context, index) {
           return Directionality(
               textDirection: TextDirection.rtl,
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Card(
-
+              child: Card(
+                elevation: 2,
+                child: InkWell(
+                  onTap: () {},
+                  child: SizedBox(
+                    height: 60,
+                    child: Center(
+                      child: ListTile(
+                        leading: Icon(listCategory[index].icon,size: 32,),
+                        title: Text(listCategory[index].title,style: const TextStyle(
+                            fontFamily: 'irs',
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold
+                        ),
+                        ),
+                        trailing: const Icon(Icons.arrow_forward_ios,),
+                      ),
+                    ),
+                  ),
                 ),
               ));
         },
