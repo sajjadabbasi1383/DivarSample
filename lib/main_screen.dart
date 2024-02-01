@@ -1,3 +1,7 @@
+import 'package:divar/addPost_screen.dart';
+import 'package:divar/category_screen.dart';
+import 'package:divar/home_screen.dart';
+import 'package:divar/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -29,7 +33,12 @@ class _MainScreenState extends State<MainScreen> {
         child: PersistentTabView(
           context,
           controller: _controller,
-          screens: [],
+          screens: [
+            HomeScreen(),
+            CategoryScreen(),
+            AddPostScreen(),
+            ProfileScreen(),
+          ],
         ),
       ),
     ));
