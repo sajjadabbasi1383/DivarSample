@@ -8,7 +8,6 @@ class AddPostScreen extends StatefulWidget {
 }
 
 class _AddPostScreenState extends State<AddPostScreen> {
-
   List<String> items = [
     'املاک',
     'وسایل نقلیه',
@@ -44,7 +43,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     fontFamily: 'irs',
                     color: Colors.black),
               ),
-              SizedBox(height: 8,),
+              SizedBox(
+                height: 8,
+              ),
               Text(
                 "در عنوان آگهی به موارد مهم و چشمگیر اشاره فرمایید.",
                 style: TextStyle(
@@ -72,24 +73,22 @@ class _AddPostScreenState extends State<AddPostScreen> {
             decoration: InputDecoration(
               filled: true,
               fillColor: Colors.grey[100],
-              contentPadding: const EdgeInsets.symmetric(
-                  vertical: 6, horizontal: 8),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
               enabledBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(6)),
                   borderSide: BorderSide(
-                      width: 1.5, color: Color.fromRGBO(166, 38, 38, 0.7))
-              ),
+                      width: 1.5, color: Color.fromRGBO(166, 38, 38, 0.7))),
               focusedBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(6)),
                   borderSide: BorderSide(
-                      width: 1.5, color: Color.fromRGBO(166, 38, 38, 0.7))
-              ),
+                      width: 1.5, color: Color.fromRGBO(166, 38, 38, 0.7))),
             ),
           ),
         ),
-
-        const SizedBox(height: 20,),
-
+        const SizedBox(
+          height: 20,
+        ),
         Container(
           alignment: Alignment.centerRight,
           margin: const EdgeInsets.only(right: 16),
@@ -98,14 +97,16 @@ class _AddPostScreenState extends State<AddPostScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "انتخاب دسته بندی",
+                "دسته بندی",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                     fontFamily: 'irs',
                     color: Colors.black),
               ),
-              SizedBox(height: 8,),
+              SizedBox(
+                height: 8,
+              ),
               Text(
                 "با توجه به لیست زیر گروه مربوط به آگهی خود را انتخاب کنید.",
                 style: TextStyle(
@@ -117,47 +118,150 @@ class _AddPostScreenState extends State<AddPostScreen> {
             ],
           ),
         ),
-
-        Container(
-          width: MediaQuery
-              .of(context)
-              .size
-              .width / 2,
-          height: 70,
-          margin: const EdgeInsets.all(16),
-          child: DropdownButtonFormField<String>(
-            onChanged:,
-            items: items.map((item) =>
-                DropdownMenuItem<String>(
-                  value: item,
-                  child: Text(item),
-                  alignment: AlignmentDirectional.centerEnd,
-                )).toList(),
-            value: selectedItem,
-            style: const TextStyle(
+        Directionality(
+          textDirection: TextDirection.rtl,
+          child: Container(
+            width: MediaQuery.of(context).size.width - 30,
+            height: 70,
+            margin: const EdgeInsets.all(16),
+            child: DropdownButtonFormField<String>(
+              onChanged: (value) => setState(() {
+                selectedItem = value!;
+              }),
+              items: items
+                  .map((item) => DropdownMenuItem<String>(
+                        value: item,
+                        alignment: AlignmentDirectional.centerStart,
+                        child: Text(
+                          item,
+                        ),
+                      ))
+                  .toList(),
+              value: selectedItem,
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
                 fontFamily: 'irs',
-                color: Colors.grey),
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.grey[100],
-              contentPadding: const EdgeInsets.symmetric(
-                  vertical: 12, horizontal: 12),
-              enabledBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(6)),
-                  borderSide: BorderSide(
-                      width: 1.5, color: Color.fromRGBO(166, 38, 38, 0.7))
+                color: Colors.grey,
               ),
-              focusedBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(6)),
-                  borderSide: BorderSide(
-                      width: 1.5, color: Color.fromRGBO(166, 38, 38, 0.7))
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.grey[100],
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                enabledBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                    borderSide: BorderSide(
+                        width: 1.5, color: Color.fromRGBO(166, 38, 38, 0.7))),
+                focusedBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                    borderSide: BorderSide(
+                        width: 1.5, color: Color.fromRGBO(166, 38, 38, 0.7))),
               ),
             ),
           ),
         ),
-
+        const SizedBox(
+          height: 20,
+        ),
+        Container(
+          alignment: Alignment.centerRight,
+          margin: const EdgeInsets.only(right: 16),
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "آدرس",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    fontFamily: 'irs',
+                    color: Colors.black),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                "آدرس خود را در قالب (استان / شهرستان / محله) وارد کنید.",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    fontFamily: 'irs',
+                    color: Colors.grey),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          width: double.infinity,
+          height: 60,
+          margin: const EdgeInsets.all(15),
+          child: TextFormField(
+            autofocus: false,
+            textAlign: TextAlign.right,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                fontFamily: 'irs',
+                color: Colors.black),
+            cursorColor: const Color.fromRGBO(166, 38, 38, 1),
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.grey[100],
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+              enabledBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(6)),
+                  borderSide: BorderSide(
+                      width: 1.5, color: Color.fromRGBO(166, 38, 38, 0.7))),
+              focusedBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(6)),
+                  borderSide: BorderSide(
+                      width: 1.5, color: Color.fromRGBO(166, 38, 38, 0.7))),
+            ),
+          ),
+        ),
+        Expanded(
+            child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            margin: const EdgeInsets.only(right: 16, left: 16,bottom: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 8),
+                  child: Text(
+                    "1/3",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        fontFamily: 'irs',
+                        color: Color.fromRGBO(166, 38, 38, 1)),
+                  ),
+                ),
+                MaterialButton(
+                  onPressed: () {},
+                  height: 50,
+                  minWidth: 90,
+                  color: const Color.fromRGBO(166, 38, 38, 1),
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                  child: const Text(
+                    "ادامه",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontFamily: 'irs',
+                        fontWeight: FontWeight.bold),
+                  ),
+                )
+              ],
+            ),
+          ),
+        )),
       ],
     );
   }
