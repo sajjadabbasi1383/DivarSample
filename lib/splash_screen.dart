@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:divar/main_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -18,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 4)).then((value) {
-      isInternetConnected().then((value) {
+      isInternetConnected(context).then((value) {
         setState(() {
           isInternetAvailable = value;
         });
@@ -39,6 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset('assets/images/logo.svg',height: 130,),
+                    const SizedBox(height: 30,),
                   ],
                 ),
                 const Positioned(
@@ -57,6 +59,10 @@ class _SplashScreenState extends State<SplashScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset('assets/images/logo.svg',height: 130,),
+                    const SpinKitThreeBounce(
+                      color: Color.fromRGBO(0, 0, 0, 0),
+                      size: 30,
+                    ),
                   ],
                 ),
                 Positioned(
@@ -64,7 +70,9 @@ class _SplashScreenState extends State<SplashScreen> {
                     right: 0,
                     left: 0,
                     child: GestureDetector(
-                      onTap: () => isInternetConnected(),
+                      onTap: () => setState(() {
+                        isInternetConnected(context);
+                      }),
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -79,9 +87,9 @@ class _SplashScreenState extends State<SplashScreen> {
                           Text(
                             "خطا در اتصال به سرور",
                             style: TextStyle(
-                                fontFamily: "dana",
+                                fontFamily: "irs",
                                 fontSize: 17,
-                                fontWeight: FontWeight.w800,
+                                fontWeight: FontWeight.w600,
                                 color: Colors.red),
                           )
                         ],
@@ -94,11 +102,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-Future<bool> isInternetConnected() async {
+Future<bool> isInternetConnected(context) async {
   try {
     final result = await InternetAddress.lookup('google.com');
     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-      // Get.offAll( MainScreen());
+      Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen(),));
       return true;
     } else {
       return false;
