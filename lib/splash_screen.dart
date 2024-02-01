@@ -12,19 +12,13 @@ class SplashScreen extends StatefulWidget {
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
+bool isInternetAvailable = true;
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool isInternetAvailable = true;
 
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 4)).then((value) {
-      isInternetConnected(context).then((value) {
-        setState(() {
-          isInternetAvailable = value;
-        });
-      });
-    });
+    checkInternet();
     super.initState();
   }
 
@@ -71,14 +65,14 @@ class _SplashScreenState extends State<SplashScreen> {
                     left: 0,
                     child: GestureDetector(
                       onTap: () => setState(() {
-                        isInternetConnected(context);
+                        checkInternet();
                       }),
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                               CupertinoIcons.refresh_thick,
-                              color: Colors.red,
+                              color: Color.fromRGBO(166, 38, 38, 1),
                               size: 29
                           ),
                           SizedBox(
@@ -88,9 +82,9 @@ class _SplashScreenState extends State<SplashScreen> {
                             "خطا در اتصال به سرور",
                             style: TextStyle(
                                 fontFamily: "irs",
-                                fontSize: 17,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.red),
+                                color: Color.fromRGBO(166, 38, 38, 1)),
                           )
                         ],
                       ),
@@ -100,6 +94,18 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
+
+  checkInternet(){
+    isInternetAvailable = true;
+    Future.delayed(const Duration(seconds: 4)).then((value) {
+      isInternetConnected(context).then((value) {
+        setState(() {
+          isInternetAvailable = value;
+        });
+      });
+    });
+  }
+
 }
 
 Future<bool> isInternetConnected(context) async {
