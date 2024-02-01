@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.vertical,
-      itemCount: 5,
+      itemCount: 3,
       itemBuilder: (context, index) {
         return Card(
           margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
@@ -80,90 +80,78 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 10,),
-                Column(
+                const SizedBox(
+                  width: 10,
+                ),
+                const Column(
                   mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(top: 8),
-                      child: SizedBox(
-                        height: 60,
-                        width: 165,
-                        child: Text(
-                          "عنوان آگهی",
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                              fontFamily: 'irs',
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                        ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 11),
+                      child: Text(
+                        "عنوان آگهی",
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(
+                            fontFamily: 'irs',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
                       ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 8),
-                      child: SizedBox(
-                        height: 30,
-                        width: 165,
-                        child: Row(
-                          children: [
-                            Text(
-                              "120000 ",
-                              textDirection: TextDirection.rtl,
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
-                                  fontFamily: 'irs'),
-                            ),
-                            Text(
-                              "تومان",
-                              textDirection: TextDirection.rtl,
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
-                                  fontFamily: 'irs'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
                     ),
                     SizedBox(
                       height: 30,
-                      width: 165,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 0),
-                            child: Container(
-                              height: 40,
-                              width: 80,
-                              alignment: Alignment.bottomRight,
-                              child: const Text("مشهد",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.grey,
-                                      fontFamily: 'irs')),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 0),
-                            child: Container(
-                              height: 40,
-                              width: 80,
-                              alignment: Alignment.bottomRight,
-                              child: const Text("لحظاتی پیش",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.grey,
-                                      fontFamily: 'irs')),
-                            ),
-                          ),
-                        ],
-                      ),
+                    ),
+                    Text(
+                      "در حد نو",
+                      textDirection: TextDirection.rtl,
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black54,
+                          fontFamily: 'irs'),
+                    ),
+                    SizedBox(
+                      height: 3,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "120000 ",
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black54,
+                              fontFamily: 'irs'),
+                        ),
+                        Text(
+                          "تومان",
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black54,
+                              fontFamily: 'irs'),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 3,
+                    ),
+                    Row(
+                      children: [
+                        Text("لحظاتی پیش در",
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.black54,
+                                fontFamily: 'irs')),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text("مشهد",
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.black54,
+                                fontFamily: 'irs')),
+                      ],
                     ),
                   ],
                 ),
