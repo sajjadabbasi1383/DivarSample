@@ -25,7 +25,31 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "دسته بندی آگهی ها",
+          style: TextStyle(
+              fontFamily: 'irs',
+              fontSize: 20,
+              color: Colors.black,
+              fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.grey[100],
+        elevation: 5,
+      ),
+      body: ListView.builder(
+        itemCount: listCategory.length,
+        itemBuilder: (context, index) {
+          return Directionality(
+              textDirection: TextDirection.rtl,
+              child: Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Card(
 
+                ),
+              ));
+        },
+      ),
     ));
   }
 }
