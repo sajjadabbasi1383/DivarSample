@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -8,8 +9,29 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  late PersistentTabController _controller;
+
+  @override
+  void initState() {
+    _controller = PersistentTabController(initialIndex: 0);
+    _controller.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return SafeArea(
+        child: Scaffold(
+      body: Directionality(
+        textDirection: TextDirection.rtl,
+        child: PersistentTabView(
+          context,
+          controller: _controller,
+          screens: [],
+        ),
+      ),
+    ));
   }
 }
