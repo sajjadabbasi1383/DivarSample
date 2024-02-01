@@ -38,6 +38,41 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Image.network(
                             "https://www.uplooder.net/img/image/55/dc50aba858e6e91b89832ccf81e8edb2/laptop.jpg",
+                            width: 170,
+                            height: 170,
+                            fit: BoxFit.fill,
+                          ),
+                          Positioned(
+                            right: 0,
+                            bottom: 0,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(10),
+                                    topLeft: Radius.circular(10)),
+                                color: Colors.black.withOpacity(0.5),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 6, horizontal: 8),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "7",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Icon(
+                                      Icons.camera_alt,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
