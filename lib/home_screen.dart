@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: 6,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12))),
-          child: Container(
+          child: SizedBox(
             height: 160,
             child: Row(
               textDirection: TextDirection.rtl,
