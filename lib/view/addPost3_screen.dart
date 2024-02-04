@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -38,6 +40,44 @@ class _AddPostThirdState extends State<AddPostThird> {
       fileName = "image_$randomNumber.jpg";
       debugPrint("fileName: $fileName");
     });
+  }
+
+  Future<void> uploadImageToServer()async{
+    String uploadUrl="";
+    try{
+      List<int> imageBytes=uploadImage!.readAsBytesSync();
+      String baseImage=base64Encode(imageBytes);
+
+      var response=await http.post(
+        Uri.parse(uploadUrl),
+        body: {
+          'image':baseImage,
+          'name':fileName
+        }
+      );
+
+      if(response.statusCode==200){
+        var jsondata=json.decode(response.body);
+        if(jsondata['error']){
+          setState(() {
+            statusImage="خطایی در بارگذاری تصویر رخ داده است.";
+          });
+        }else{
+          setState(() {
+            statusImage="تصویر با موفقیت آپلود شد.";
+          });
+        }
+      }else{
+        setState(() {
+          statusImage="خطایی در پردازش تصویر رخ داده است.";
+        });
+      }
+
+    }catch(e){
+      setState(() {
+        statusImage="اتصال اینترنت برقرار نشد.";
+      });
+    }
   }
 
   @override
