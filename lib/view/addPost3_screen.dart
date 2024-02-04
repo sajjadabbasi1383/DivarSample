@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:js_interop';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -7,36 +6,36 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddPostThird extends StatefulWidget {
-
-  final String classTitle,classAddress,classCategoryId,classPrice,classCall;
+  final String classTitle, classAddress, classCategoryId, classPrice, classCall;
 
   const AddPostThird(this.classTitle, this.classAddress, this.classCategoryId,
-      this.classPrice, this.classCall, {super.key});
+      this.classPrice, this.classCall,
+      {super.key});
 
   @override
   State<AddPostThird> createState() => _AddPostThirdState();
 }
 
 class _AddPostThirdState extends State<AddPostThird> {
+  TextEditingController adDescriptionController = TextEditingController();
 
-  TextEditingController adDescriptionController=TextEditingController();
+  String adDescription = "";
+  String statusImage = "نامشخص";
+  File? uploadImage;
+  String fileName = "";
 
-  String adDescription="";
-  String statusImage="نامشخص";
-  late File uploadImage;
-  String fileName="";
+  Future<void> chooseImage() async {
+    final choosedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (choosedImage == null) return;
 
-  Future<void> chooseImage() async{
-    final choosedImage=await ImagePicker().pickImage(source: ImageSource.gallery);
-    if(choosedImage==null)return;
+    final imageTemp = File(choosedImage.path);
 
-    final imageTemp=File(choosedImage.path);
-
-    Random random =Random();
-    int randomNumber=random.nextInt(1000);
+    Random random = Random();
+    int randomNumber = random.nextInt(1000);
     setState(() {
-      uploadImage=imageTemp;
-      fileName="image_$randomNumber.jpg";
+      uploadImage = imageTemp;
+      fileName = "image_$randomNumber.jpg";
       debugPrint("fileName: $fileName");
     });
   }
@@ -48,7 +47,7 @@ class _AddPostThirdState extends State<AddPostThird> {
         behavior: MyBehavior(),
         child: SingleChildScrollView(
           child: SizedBox(
-            height: MediaQuery.sizeOf(context).height/1.2,
+            height: MediaQuery.sizeOf(context).height / 1.2,
             child: Column(
               children: [
                 const SizedBox(
@@ -100,11 +99,20 @@ class _AddPostThirdState extends State<AddPostThird> {
                           height: MediaQuery.sizeOf(context).width / 3 - 18,
                           decoration: const BoxDecoration(
                               color: Colors.black12,
-                              borderRadius: BorderRadius.all(Radius.circular(8))),
-                          child: uploadImage.isNull?Image.file(uploadImage): const Icon(
-                            CupertinoIcons.plus,
-                            size: 48,
-                          ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8))),
+                          child: uploadImage != null
+                              ? ClipRRect(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(8)),
+                                  child: Image.file(
+                                    uploadImage!,
+                                    fit: BoxFit.fill,
+                                  ))
+                              : const Icon(
+                                  CupertinoIcons.plus,
+                                  size: 48,
+                                ),
                         ),
                       ),
                       Column(
@@ -126,13 +134,17 @@ class _AddPostThirdState extends State<AddPostThird> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                          const SizedBox(height: 20,),
-                          Text(statusImage,style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'irs',
-                            fontSize: 15,
-                            color: Colors.grey
-                          ),)
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            statusImage,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'irs',
+                                fontSize: 15,
+                                color: Colors.grey),
+                          )
                         ],
                       ),
                     ],
@@ -176,7 +188,7 @@ class _AddPostThirdState extends State<AddPostThird> {
                     controller: adDescriptionController,
                     onChanged: (value) {
                       setState(() {
-                        adDescription=adDescriptionController.text;
+                        adDescription = adDescriptionController.text;
                         debugPrint("Description: $adDescription");
                       });
                     },
@@ -195,66 +207,69 @@ class _AddPostThirdState extends State<AddPostThird> {
                           color: Colors.grey),
                       filled: true,
                       fillColor: Colors.grey[100],
-                      contentPadding:
-                          const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 6, horizontal: 8),
                       enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(6)),
                           borderSide: BorderSide(
-                              width: 1.5, color: Color.fromRGBO(166, 38, 38, 0.7))),
+                              width: 1.5,
+                              color: Color.fromRGBO(166, 38, 38, 0.7))),
                       focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(6)),
                           borderSide: BorderSide(
-                              width: 1.5, color: Color.fromRGBO(166, 38, 38, 0.7))),
+                              width: 1.5,
+                              color: Color.fromRGBO(166, 38, 38, 0.7))),
                     ),
                   ),
                 ),
                 Expanded(
                     child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 16, left: 16,bottom: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: Text(
-                                "3/3",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    fontFamily: 'irs',
-                                    color: Color.fromRGBO(166, 38, 38, 1)),
-                              ),
-                            ),
-                            MaterialButton(
-                              onPressed: () {
-                                debugPrint("title: ${widget.classTitle}");
-                                debugPrint("address: ${widget.classAddress}");
-                                debugPrint("category: ${widget.classCategoryId}");
-                                debugPrint("price: ${widget.classPrice}");
-                                debugPrint("call: ${widget.classCall}");
-                                debugPrint("description: $adDescription");
-                              },
-                              height: 50,
-                              minWidth: 90,
-                              color: const Color.fromRGBO(166, 38, 38, 1),
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4)),
-                              child: const Text(
-                                "تایید",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontFamily: 'irs',
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          ],
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    margin:
+                        const EdgeInsets.only(right: 16, left: 16, bottom: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(top: 8),
+                          child: Text(
+                            "3/3",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                fontFamily: 'irs',
+                                color: Color.fromRGBO(166, 38, 38, 1)),
+                          ),
                         ),
-                      ),
-                    )),
+                        MaterialButton(
+                          onPressed: () {
+                            debugPrint("title: ${widget.classTitle}");
+                            debugPrint("address: ${widget.classAddress}");
+                            debugPrint("category: ${widget.classCategoryId}");
+                            debugPrint("price: ${widget.classPrice}");
+                            debugPrint("call: ${widget.classCall}");
+                            debugPrint("description: $adDescription");
+                          },
+                          height: 50,
+                          minWidth: 90,
+                          color: const Color.fromRGBO(166, 38, 38, 1),
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4)),
+                          child: const Text(
+                            "تایید",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontFamily: 'irs',
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )),
               ],
             ),
           ),
