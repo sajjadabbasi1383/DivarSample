@@ -2,7 +2,11 @@ import 'package:divar/view/addPost3_screen.dart';
 import 'package:flutter/material.dart';
 
 class AddPostSecond extends StatefulWidget {
-  const AddPostSecond({super.key});
+
+  String classTitle,classAddress,classCategoryId;
+
+
+  AddPostSecond(this.classTitle, this.classAddress, this.classCategoryId, {super.key});
 
   @override
   State<AddPostSecond> createState() => _AddPostSecondState();

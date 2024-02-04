@@ -22,6 +22,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   String selectedItem = "املاک";
 
+  TextEditingController adTitleController=TextEditingController();
+  TextEditingController adAddressController=TextEditingController();
+
+  String adTitle="";
+  String adAddress="";
+  String adCategoryId="";
+
   @override
   Widget build(BuildContext context) {
     return ScrollConfiguration(
@@ -68,6 +75,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 height: 60,
                 margin: const EdgeInsets.all(15),
                 child: TextFormField(
+                  controller: adTitleController,
+                  onChanged: (value) {
+                    setState(() {
+                      adTitle=adTitleController.text;
+                      debugPrint("title: $adTitle");
+                    });
+                  },
                   autofocus: false,
                   textAlign: TextAlign.right,
                   style: const TextStyle(
@@ -133,6 +147,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   child: DropdownButtonFormField<String>(
                     onChanged: (value) => setState(() {
                       selectedItem = value!;
+                      adCategoryId=(items.indexOf(value)+1).toString();
+                      debugPrint("CategoryId: $adCategoryId");
                     }),
                     items: items
                         .map((item) => DropdownMenuItem<String>(
@@ -205,6 +221,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 margin: const EdgeInsets.all(15),
                 child: TextFormField(
                   autofocus: false,
+                  controller: adAddressController,
+                  onChanged: (value) {
+                    setState(() {
+                      adAddress=adAddressController.text;
+                      debugPrint("address: $adAddress");
+                    });
+                  },
                   textAlign: TextAlign.right,
                   style: const TextStyle(
                       fontWeight: FontWeight.bold,
@@ -249,7 +272,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 ),
                 MaterialButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => AddPostSecond(),));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => AddPostSecond(adTitle,adAddress,adCategoryId),));
                   },
                   height: 50,
                   minWidth: 90,
