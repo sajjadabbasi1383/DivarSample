@@ -14,6 +14,11 @@ class AddPostThird extends StatefulWidget {
 }
 
 class _AddPostThirdState extends State<AddPostThird> {
+
+  TextEditingController adDescriptionController=TextEditingController();
+
+  String adDescription="";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -143,6 +148,13 @@ class _AddPostThirdState extends State<AddPostThird> {
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: TextField(
+                    controller: adDescriptionController,
+                    onChanged: (value) {
+                      setState(() {
+                        adDescription=adDescriptionController.text;
+                        debugPrint("Description: $adDescription");
+                      });
+                    },
                     keyboardType: TextInputType.multiline,
                     textDirection: TextDirection.rtl,
                     maxLines: 7,
@@ -191,7 +203,14 @@ class _AddPostThirdState extends State<AddPostThird> {
                               ),
                             ),
                             MaterialButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                debugPrint("title: ${widget.classTitle}");
+                                debugPrint("address: ${widget.classAddress}");
+                                debugPrint("category: ${widget.classCategoryId}");
+                                debugPrint("price: ${widget.classPrice}");
+                                debugPrint("call: ${widget.classCall}");
+                                debugPrint("description: $adDescription");
+                              },
                               height: 50,
                               minWidth: 90,
                               color: const Color.fromRGBO(166, 38, 38, 1),
