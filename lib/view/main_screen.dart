@@ -1,11 +1,12 @@
-import 'package:divar/addPost_screen.dart';
-import 'package:divar/category_screen.dart';
-import 'package:divar/home_screen.dart';
-import 'package:divar/profile_screen.dart';
+import 'package:divar/view/addPost_screen.dart';
+
+import 'package:divar/view/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+
+import 'category_screen.dart';
+import 'home_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

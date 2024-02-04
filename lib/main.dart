@@ -1,4 +1,4 @@
-import 'package:divar/splash_screen.dart';
+import 'package:divar/view/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

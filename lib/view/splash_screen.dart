@@ -1,10 +1,11 @@
 import 'dart:io';
 
-import 'package:divar/main_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -112,7 +113,7 @@ Future<bool> isInternetConnected(context) async {
   try {
     final result = await InternetAddress.lookup('google.com');
     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen(),));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const MainScreen(),));
       return true;
     } else {
       return false;
