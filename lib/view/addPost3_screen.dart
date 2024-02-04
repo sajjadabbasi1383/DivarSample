@@ -2,7 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddPostThird extends StatefulWidget {
-  const AddPostThird({super.key});
+
+  final String classTitle,classAddress,classCategoryId,classPrice,classCall;
+
+
+  const AddPostThird(this.classTitle, this.classAddress, this.classCategoryId,
+      this.classPrice, this.classCall, {super.key});
 
   @override
   State<AddPostThird> createState() => _AddPostThirdState();
@@ -186,9 +191,7 @@ class _AddPostThirdState extends State<AddPostThird> {
                               ),
                             ),
                             MaterialButton(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => AddPostThird(),));
-                              },
+                              onPressed: () {},
                               height: 50,
                               minWidth: 90,
                               color: const Color.fromRGBO(166, 38, 38, 1),

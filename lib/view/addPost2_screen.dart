@@ -3,16 +3,23 @@ import 'package:flutter/material.dart';
 
 class AddPostSecond extends StatefulWidget {
 
-  String classTitle,classAddress,classCategoryId;
+ final String classTitle,classAddress,classCategoryId;
 
 
-  AddPostSecond(this.classTitle, this.classAddress, this.classCategoryId, {super.key});
+  const AddPostSecond(this.classTitle, this.classAddress, this.classCategoryId, {super.key});
 
   @override
   State<AddPostSecond> createState() => _AddPostSecondState();
 }
 
 class _AddPostSecondState extends State<AddPostSecond> {
+
+  TextEditingController adPriceController=TextEditingController();
+  TextEditingController adCallController=TextEditingController();
+
+  String adPrice="";
+  String adCall="";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +67,13 @@ class _AddPostSecondState extends State<AddPostSecond> {
                   height: 60,
                   margin: const EdgeInsets.all(15),
                   child: TextFormField(
+                    controller: adPriceController,
+                    onChanged: (value) {
+                      setState(() {
+                        adPrice=adPriceController.text;
+                        debugPrint("Price: $adPrice");
+                      });
+                    },
                     autofocus: false,
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.right,
@@ -122,6 +136,11 @@ class _AddPostSecondState extends State<AddPostSecond> {
                   height: 60,
                   margin: const EdgeInsets.all(15),
                   child: TextFormField(
+                    controller: adCallController,
+                    onChanged: (value) {
+                      adCall=adCallController.text;
+                      debugPrint("Call: $adCall");
+                    },
                     autofocus: false,
                     keyboardType: TextInputType.phone,
                     textAlign: TextAlign.right,
@@ -168,7 +187,7 @@ class _AddPostSecondState extends State<AddPostSecond> {
                             ),
                             MaterialButton(
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => AddPostThird(),));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => AddPostThird(widget.classTitle,widget.classAddress,widget.classCategoryId,adPrice,adCall),));
                               },
                               height: 50,
                               minWidth: 90,
