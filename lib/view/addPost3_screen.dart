@@ -1,10 +1,14 @@
+import 'dart:io';
+import 'dart:js_interop';
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddPostThird extends StatefulWidget {
 
   final String classTitle,classAddress,classCategoryId,classPrice,classCall;
-
 
   const AddPostThird(this.classTitle, this.classAddress, this.classCategoryId,
       this.classPrice, this.classCall, {super.key});
@@ -18,6 +22,24 @@ class _AddPostThirdState extends State<AddPostThird> {
   TextEditingController adDescriptionController=TextEditingController();
 
   String adDescription="";
+  String statusImage="نامشخص";
+  late File uploadImage;
+  String fileName="";
+
+  Future<void> chooseImage() async{
+    final choosedImage=await ImagePicker().pickImage(source: ImageSource.gallery);
+    if(choosedImage==null)return;
+
+    final imageTemp=File(choosedImage.path);
+
+    Random random =Random();
+    int randomNumber=random.nextInt(1000);
+    setState(() {
+      uploadImage=imageTemp;
+      fileName="image_$randomNumber.jpg";
+      debugPrint("fileName: $fileName");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,54 +86,57 @@ class _AddPostThirdState extends State<AddPostThird> {
                 const SizedBox(
                   height: 20,
                 ),
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 15),
-                        width: MediaQuery.sizeOf(context).width / 3 - 21,
-                        height: MediaQuery.sizeOf(context).width / 3 - 21,
-                        decoration: const BoxDecoration(
-                            color: Colors.black12,
-                            borderRadius: BorderRadius.all(Radius.circular(8))),
-                        child: const Icon(
-                          CupertinoIcons.plus,
-                          size: 48,
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          chooseImage();
+                        },
+                        child: Container(
+                          width: MediaQuery.sizeOf(context).width / 3 - 18,
+                          height: MediaQuery.sizeOf(context).width / 3 - 18,
+                          decoration: const BoxDecoration(
+                              color: Colors.black12,
+                              borderRadius: BorderRadius.all(Radius.circular(8))),
+                          child: uploadImage.isNull?Image.file(uploadImage): const Icon(
+                            CupertinoIcons.plus,
+                            size: 48,
+                          ),
                         ),
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 15),
-                        width: MediaQuery.sizeOf(context).width / 3 - 21,
-                        height: MediaQuery.sizeOf(context).width / 3 - 21,
-                        decoration: const BoxDecoration(
-                            color: Colors.black12,
-                            borderRadius: BorderRadius.all(Radius.circular(8))),
-                        child: const Icon(
-                          CupertinoIcons.plus,
-                          size: 48,
-                        ),
+                      Column(
+                        children: [
+                          MaterialButton(
+                            onPressed: () {},
+                            height: 50,
+                            minWidth: 120,
+                            color: Colors.green,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4)),
+                            child: const Text(
+                              "بارگذاری تصویر",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontFamily: 'irs',
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const SizedBox(height: 20,),
+                          Text(statusImage,style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'irs',
+                            fontSize: 15,
+                            color: Colors.grey
+                          ),)
+                        ],
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 15),
-                        width: MediaQuery.sizeOf(context).width / 3 - 21,
-                        height: MediaQuery.sizeOf(context).width / 3 - 21,
-                        decoration: const BoxDecoration(
-                            color: Colors.black12,
-                            borderRadius: BorderRadius.all(Radius.circular(8))),
-                        child: const Icon(
-                          CupertinoIcons.plus,
-                          size: 48,
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
