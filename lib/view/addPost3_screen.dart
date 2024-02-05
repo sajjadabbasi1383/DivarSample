@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../Widget/my_widget.dart';
@@ -21,7 +22,6 @@ class AddPostThird extends StatefulWidget {
 }
 
 class _AddPostThirdState extends State<AddPostThird> {
-
   TextEditingController adDescriptionController = TextEditingController();
 
   String adDescription = "";
@@ -235,31 +235,36 @@ class _AddPostThirdState extends State<AddPostThird> {
                         ),
                         MaterialButton(
                           onPressed: () {
-                            debugPrint("title: ${widget.classTitle}");
-                            debugPrint("address: ${widget.classAddress}");
-                            debugPrint("category: ${widget.classCategoryId}");
-                            debugPrint("price: ${widget.classPrice}");
-                            debugPrint("call: ${widget.classCall}");
-                            debugPrint("description: $adDescription");
+                            String imageUrl =
+                                "http://sajjadabbasi.freehost.io/Divar/uploaded/$fileName";
+                            String description = adDescription;
 
-                            String imageUrl="http://sajjadabbasi.freehost.io/Divar/uploadimage.php$fileName";
+                            // debugPrint("title: ${widget.classTitle}");
+                            // debugPrint("address: ${widget.classAddress}");
+                            // debugPrint("category: ${widget.classCategoryId}");
+                            // debugPrint("price: ${widget.classPrice}");
+                            // debugPrint("call: ${widget.classCall}");
+                            // debugPrint("description: $adDescription");
+                            // debugPrint("description: $imageUrl");
 
-                            String title=widget.classTitle;
-                            String address=widget.classAddress;
-                            String categoryId=widget.classCategoryId;
-                            String price=widget.classPrice;
-                            String call=widget.classCall;
-                            String description=adDescription;
-
-
-                            if(description==""){
-                              showSnakBar(context, "لطفا توضیحات آگهی خود را وارد فرمایید");
-                            }else if(fileName=="") {
-                              showSnakBar(context, "لطفا تصویر آگهی خود را وارد فرمایید");
-                            }else{
-
+                            if (description == "") {
+                              showSnakBar(context,
+                                  "لطفا توضیحات آگهی خود را وارد فرمایید");
+                            } else if (fileName == "") {
+                              showSnakBar(context,
+                                  "لطفا تصویر آگهی خود را وارد فرمایید");
+                            } else {
+                              sendUserAd(
+                                title: widget.classTitle,
+                                price: widget.classPrice,
+                                address: widget.classAddress,
+                                call: widget.classCall,
+                                catId: widget.classCategoryId,
+                                description: adDescription,
+                                imageLink: imageUrl,
+                                context: context,
+                              );
                             }
-
                           },
                           height: 50,
                           minWidth: 90,
@@ -290,7 +295,7 @@ class _AddPostThirdState extends State<AddPostThird> {
 
   Future<void> chooseImage() async {
     final choosedImage =
-    await ImagePicker().pickImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (choosedImage == null) return;
 
     final imageTemp = File(choosedImage.path);
@@ -304,44 +309,79 @@ class _AddPostThirdState extends State<AddPostThird> {
     });
   }
 
-  Future<void> uploadImageToServer()async{
-    String uploadUrl="http://sajjadabbasi.freehost.io/Divar/uploadimage.php";
-    try{
-      List<int> imageBytes=uploadImage!.readAsBytesSync();
-      String baseImage=base64Encode(imageBytes);
+  Future<void> uploadImageToServer() async {
+    String uploadUrl = "http://sajjadabbasi.freehost.io/Divar/uploadimage.php";
+    try {
+      List<int> imageBytes = uploadImage!.readAsBytesSync();
+      String baseImage = base64Encode(imageBytes);
 
-      var response=await http.post(
-          Uri.parse(uploadUrl),
-          body: {
-            'image':baseImage,
-            'name':fileName
-          }
-      );
+      var response = await http.post(Uri.parse(uploadUrl),
+          body: {'image': baseImage, 'name': fileName});
 
-      if(response.statusCode==200){
-        var jsondata=json.decode(response.body);
-        if(jsondata['error']){
+      if (response.statusCode == 200) {
+        var jsondata = json.decode(response.body);
+        if (jsondata['error']) {
           setState(() {
-            statusImage="خطایی در بارگذاری تصویر رخ داده است.";
+            statusImage = "خطایی در بارگذاری تصویر رخ داده است.";
           });
-        }else{
+        } else {
           setState(() {
-            statusImage="تصویر با موفقیت آپلود شد.";
+            statusImage = "تصویر با موفقیت آپلود شد.";
           });
         }
-      }else{
+      } else {
         setState(() {
-          statusImage="خطایی در پردازش تصویر رخ داده است.";
+          statusImage = "خطایی در پردازش تصویر رخ داده است.";
         });
       }
-
-    }catch(e){
+    } catch (e) {
       setState(() {
-        statusImage="اتصال اینترنت برقرار نشد.";
+        statusImage = "اتصال اینترنت برقرار نشد.";
       });
     }
   }
+}
 
+void sendUserAd(
+    {required BuildContext context,
+    required String title,
+    required String catId,
+    required String address,
+    required String price,
+    required String call,
+    required String description,
+    required String imageLink}) async {
+  var body = <String, dynamic>{};
+  body['title'] = title;
+  body['catId'] = catId;
+  body['address'] = address;
+  body['price'] = price;
+  body['call'] = call;
+  body['description'] = description;
+  body['imageLink'] = imageLink;
+
+  debugPrint("title: ${body['title']}");
+  debugPrint("address: ${body['catId']}");
+  debugPrint("category: ${body['address']}");
+  debugPrint("price: ${body['price']}");
+  debugPrint("call: ${body['call']}");
+  debugPrint("description: ${body['description']}");
+  debugPrint("description: ${body['imageLink']}");
+
+  Response response = await post(
+      Uri.parse('http://sajjadabbasi.freehost.io/Divar/senduserAd.php'),
+      body: body);
+  if (response.statusCode == 200) {
+    var jsonCallBack = json.decode(utf8.decode(response.bodyBytes));
+
+    if (jsonCallBack['error'] == false) {
+      showSnakBar(context, "اطلاعات آگهی با موفقیت ارسال گردید.");
+    } else {
+      showSnakBar(context, "خطا در ارسال اطلاعات");
+    }
+  } else {
+    showSnakBar(context, "خطا در ارتباط با سرور");
+  }
 }
 
 class MyBehavior extends ScrollBehavior {
