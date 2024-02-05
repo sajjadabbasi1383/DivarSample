@@ -2,11 +2,16 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:divar/view/addPost_screen.dart';
+import 'package:divar/view/home_screen.dart';
+import 'package:divar/view/main_screen.dart';
+import 'package:divar/view/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../Widget/my_widget.dart';
 
@@ -376,6 +381,13 @@ void sendUserAd(
 
     if (jsonCallBack['error'] == false) {
       showSnakBar(context, "اطلاعات آگهی با موفقیت ارسال گردید.");
+      PersistentNavBarNavigator.pushNewScreen(
+        context,
+        screen: const AddPostScreen(),
+        withNavBar: true, // OPTIONAL VALUE. True by default.
+        pageTransitionAnimation: PageTransitionAnimation.cupertino,
+      );
+      navController.jumpToTab(0);
     } else {
       showSnakBar(context, "خطا در ارسال اطلاعات");
     }

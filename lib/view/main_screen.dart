@@ -14,9 +14,9 @@ class MainScreen extends StatefulWidget {
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
-
+late PersistentTabController navController;
 class _MainScreenState extends State<MainScreen> {
-  late PersistentTabController _controller;
+
 
   static const Color baseColor = Color(0xffA82626);
 
@@ -28,8 +28,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    _controller = PersistentTabController(initialIndex: 0);
-    _controller.addListener(() {
+    navController = PersistentTabController(initialIndex: 0);
+    navController.addListener(() {
       setState(() {});
     });
     super.initState();
@@ -43,7 +43,7 @@ class _MainScreenState extends State<MainScreen> {
         textDirection: TextDirection.rtl,
         child: PersistentTabView(
           context,
-          controller: _controller,
+          controller: navController,
           screens: const [
             HomeScreen(),
             CategoryScreen(),
