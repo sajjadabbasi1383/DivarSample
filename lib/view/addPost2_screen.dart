@@ -1,6 +1,8 @@
 import 'package:divar/view/addPost3_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../Widget/my_widget.dart';
+
 class AddPostSecond extends StatefulWidget {
 
  final String classTitle,classAddress,classCategoryId;
@@ -187,7 +189,13 @@ class _AddPostSecondState extends State<AddPostSecond> {
                             ),
                             MaterialButton(
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => AddPostThird(widget.classTitle,widget.classAddress,widget.classCategoryId,adPrice,adCall),));
+                                if(adPrice==""){
+                                  showSnakBar(context, "لطفا قیمت آگهی خود را وارد فرمایید");
+                                }else if(adCall==""){
+                                  showSnakBar(context, "لطفا اطلاعات تماس خود را وارد فرمایید");
+                                }else{
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => AddPostThird(widget.classTitle,widget.classAddress,widget.classCategoryId,adPrice,adCall),));
+                                }
                               },
                               height: 50,
                               minWidth: 90,

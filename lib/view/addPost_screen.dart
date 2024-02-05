@@ -1,3 +1,4 @@
+import 'package:divar/Widget/my_widget.dart';
 import 'package:divar/view/addPost2_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -272,7 +273,16 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 ),
                 MaterialButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => AddPostSecond(adTitle,adAddress,adCategoryId),));
+                    if(adTitle==""){
+                      showSnakBar(context, "لطفا عنوان آگهی خود را وارد فرمایید");
+                    }else if(adCategoryId==""){
+                      showSnakBar(context, "لطفا دسته بندی مورد نظر را انتخاب فرمایید");
+                    }else if(adAddress==""){
+                      showSnakBar(context, "لطفا آدرس  را وارد فرمایید");
+                    }else{
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => AddPostSecond(adTitle,adAddress,adCategoryId),));
+                    }
+
                   },
                   height: 50,
                   minWidth: 90,

@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../Widget/my_widget.dart';
+
 class AddPostThird extends StatefulWidget {
   final String classTitle, classAddress, classCategoryId, classPrice, classCall;
 
@@ -250,19 +252,11 @@ class _AddPostThirdState extends State<AddPostThird> {
                             String description=adDescription;
 
 
-                            if(title==""){
-
-                            }else if(address==""){
-
-                            }else if(categoryId==""){
-
-                            }else if(price==""){
-
-                            }else if(call==""){
-
-                            }else if(description==""){
-
-                            }else if(fileName==""){
+                            if(description==""){
+                              showSnakBar(context, "لطفا توضیحات آگهی خود را وارد فرمایید");
+                            }else if(fileName=="") {
+                              showSnakBar(context, "لطفا تصویر آگهی خود را وارد فرمایید");
+                            }else{
 
                             }
 
@@ -348,12 +342,7 @@ class _AddPostThirdState extends State<AddPostThird> {
     }
   }
 
-
-
-
 }
-
-
 
 class MyBehavior extends ScrollBehavior {
   @override
