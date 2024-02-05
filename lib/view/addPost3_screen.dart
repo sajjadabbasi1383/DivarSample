@@ -19,66 +19,13 @@ class AddPostThird extends StatefulWidget {
 }
 
 class _AddPostThirdState extends State<AddPostThird> {
+
   TextEditingController adDescriptionController = TextEditingController();
 
   String adDescription = "";
   String statusImage = "نامشخص";
   File? uploadImage;
   String fileName = "";
-
-  Future<void> chooseImage() async {
-    final choosedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (choosedImage == null) return;
-
-    final imageTemp = File(choosedImage.path);
-
-    Random random = Random();
-    int randomNumber = random.nextInt(1000);
-    setState(() {
-      uploadImage = imageTemp;
-      fileName = "image_$randomNumber.jpg";
-      debugPrint("fileName: $fileName");
-    });
-  }
-
-  Future<void> uploadImageToServer()async{
-    String uploadUrl="";
-    try{
-      List<int> imageBytes=uploadImage!.readAsBytesSync();
-      String baseImage=base64Encode(imageBytes);
-
-      var response=await http.post(
-        Uri.parse(uploadUrl),
-        body: {
-          'image':baseImage,
-          'name':fileName
-        }
-      );
-
-      if(response.statusCode==200){
-        var jsondata=json.decode(response.body);
-        if(jsondata['error']){
-          setState(() {
-            statusImage="خطایی در بارگذاری تصویر رخ داده است.";
-          });
-        }else{
-          setState(() {
-            statusImage="تصویر با موفقیت آپلود شد.";
-          });
-        }
-      }else{
-        setState(() {
-          statusImage="خطایی در پردازش تصویر رخ داده است.";
-        });
-      }
-
-    }catch(e){
-      setState(() {
-        statusImage="اتصال اینترنت برقرار نشد.";
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +105,9 @@ class _AddPostThirdState extends State<AddPostThird> {
                       Column(
                         children: [
                           MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              uploadImageToServer();
+                            },
                             height: 50,
                             minWidth: 120,
                             color: Colors.green,
@@ -290,6 +239,33 @@ class _AddPostThirdState extends State<AddPostThird> {
                             debugPrint("price: ${widget.classPrice}");
                             debugPrint("call: ${widget.classCall}");
                             debugPrint("description: $adDescription");
+
+                            String imageUrl="http://sajjadabbasi.freehost.io/Divar/uploadimage.php$fileName";
+
+                            String title=widget.classTitle;
+                            String address=widget.classAddress;
+                            String categoryId=widget.classCategoryId;
+                            String price=widget.classPrice;
+                            String call=widget.classCall;
+                            String description=adDescription;
+
+
+                            if(title==""){
+
+                            }else if(address==""){
+
+                            }else if(categoryId==""){
+
+                            }else if(price==""){
+
+                            }else if(call==""){
+
+                            }else if(description==""){
+
+                            }else if(fileName==""){
+
+                            }
+
                           },
                           height: 50,
                           minWidth: 90,
@@ -317,7 +293,67 @@ class _AddPostThirdState extends State<AddPostThird> {
       ),
     );
   }
+
+  Future<void> chooseImage() async {
+    final choosedImage =
+    await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (choosedImage == null) return;
+
+    final imageTemp = File(choosedImage.path);
+
+    Random random = Random();
+    int randomNumber = random.nextInt(1000);
+    setState(() {
+      uploadImage = imageTemp;
+      fileName = "image_$randomNumber.jpg";
+      debugPrint("fileName: $fileName");
+    });
+  }
+
+  Future<void> uploadImageToServer()async{
+    String uploadUrl="http://sajjadabbasi.freehost.io/Divar/uploadimage.php";
+    try{
+      List<int> imageBytes=uploadImage!.readAsBytesSync();
+      String baseImage=base64Encode(imageBytes);
+
+      var response=await http.post(
+          Uri.parse(uploadUrl),
+          body: {
+            'image':baseImage,
+            'name':fileName
+          }
+      );
+
+      if(response.statusCode==200){
+        var jsondata=json.decode(response.body);
+        if(jsondata['error']){
+          setState(() {
+            statusImage="خطایی در بارگذاری تصویر رخ داده است.";
+          });
+        }else{
+          setState(() {
+            statusImage="تصویر با موفقیت آپلود شد.";
+          });
+        }
+      }else{
+        setState(() {
+          statusImage="خطایی در پردازش تصویر رخ داده است.";
+        });
+      }
+
+    }catch(e){
+      setState(() {
+        statusImage="اتصال اینترنت برقرار نشد.";
+      });
+    }
+  }
+
+
+
+
 }
+
+
 
 class MyBehavior extends ScrollBehavior {
   @override
