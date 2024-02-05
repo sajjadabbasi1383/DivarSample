@@ -23,6 +23,29 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "دیوار آگهی ها",
+          style: TextStyle(
+              fontFamily: 'irs',
+              fontSize: 20,
+              color: Colors.black,
+              fontWeight: FontWeight.bold),
+        ),
+        leading: GestureDetector(
+            onTap: () {
+              setState(() {
+                listAds.clear();
+                fetchItems();
+              });
+            },
+            child: const SizedBox(
+                height: 20,
+                width: 20,
+                child: Icon(Icons.refresh,color: Colors.black87,))),
+        backgroundColor: Colors.grey[100],
+        elevation: 5,
+      ),
       body: listAds.length == 0
           ? const Center(
               child: Text(
@@ -192,6 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void fetchItems() async {
+
     Response response = await get(Uri.parse('http://sajjadabbasi.freehost.io/Divar/get_Post.php'));
 
     var productJson = json.decode(utf8.decode(response.bodyBytes));
