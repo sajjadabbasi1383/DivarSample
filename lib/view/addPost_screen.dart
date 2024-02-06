@@ -91,7 +91,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                         fontSize: 14,
                         fontFamily: 'irs',
                         color: Colors.black),
-                    cursorColor: const Color.fromRGBO(166, 38, 38, 1),
+                    cursorColor: const Color.fromRGBO(0, 95, 186, 1),
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.grey[100],
@@ -100,11 +100,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(6)),
                           borderSide: BorderSide(
-                              width: 1.5, color: Color.fromARGB(130,166, 38, 38))),
+                              width: 1.5, color: Color.fromRGBO(0, 95, 186, 1))),
                       focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(6)),
                           borderSide: BorderSide(
-                              width: 1.5, color: Color.fromRGBO(166, 38, 38, 0.7))),
+                              width: 1.5, color: Color.fromRGBO(0, 95, 186, 1))),
                     ),
                   ),
                 ),
@@ -176,11 +176,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
                         enabledBorder: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(6)),
                             borderSide: BorderSide(
-                                width: 1.5, color: Color.fromARGB(130,166, 38, 38))),
+                                width: 1.5, color: Color.fromRGBO(0, 95, 186, 1))),
                         focusedBorder: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(6)),
                             borderSide: BorderSide(
-                                width: 1.5, color: Color.fromARGB(130,166, 38, 38))),
+                                width: 1.5, color: Color.fromRGBO(0, 95, 186, 1))),
                       ),
                     ),
                   ),
@@ -236,7 +236,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                         fontSize: 14,
                         fontFamily: 'irs',
                         color: Colors.black),
-                    cursorColor: const Color.fromRGBO(166, 38, 38, 1),
+                    cursorColor: const Color.fromRGBO(0, 95, 186, 1),
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.grey[100],
@@ -245,11 +245,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(6)),
                           borderSide: BorderSide(
-                              width: 1.5, color: Color.fromARGB(130,166, 38, 38))),
+                              width: 1.5, color: Color.fromRGBO(0, 95, 186, 1))),
                       focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(6)),
                           borderSide: BorderSide(
-                              width: 1.5, color: Color.fromRGBO(166, 38, 38, 0.7))),
+                              width: 1.5, color: Color.fromRGBO(0, 95, 186, 1))),
                     ),
                   ),
                 ),
@@ -269,7 +269,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                           fontFamily: 'irs',
-                          color: Color.fromRGBO(166, 38, 38, 1)),
+                          color: Color.fromRGBO(0, 95, 186, 1)),
                     ),
                   ),
                   MaterialButton(
@@ -287,7 +287,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     },
                     height: 50,
                     minWidth: 90,
-                    color: const Color.fromRGBO(166, 38, 38, 1),
+                    color: const Color.fromRGBO(0, 95, 186, 1),
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4)),

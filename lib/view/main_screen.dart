@@ -18,7 +18,7 @@ late PersistentTabController navController;
 class _MainScreenState extends State<MainScreen> {
 
 
-  static const Color baseColor = Color(0xffA82626);
+  static const Color baseColor = Color(0xff005FA8);
 
   static const activeStyle = TextStyle(
       fontFamily: 'irs',

@@ -207,12 +207,12 @@ class _AddPostThirdState extends State<AddPostThird> {
                           borderRadius: BorderRadius.all(Radius.circular(6)),
                           borderSide: BorderSide(
                               width: 1.5,
-                              color: Color.fromARGB(130,166, 38, 38))),
+                              color: Color.fromRGBO(0, 95, 186, 1))),
                       focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(6)),
                           borderSide: BorderSide(
                               width: 1.5,
-                              color: Color.fromRGBO(166, 38, 38, 0.7))),
+                              color: Color.fromRGBO(0, 95, 186, 1))),
                     ),
                   ),
                 ),
@@ -233,7 +233,7 @@ class _AddPostThirdState extends State<AddPostThird> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                                 fontFamily: 'irs',
-                                color: Color.fromRGBO(166, 38, 38, 1)),
+                                color: Color.fromRGBO(0, 95, 186, 1)),
                           ),
                         ),
                         MaterialButton(
@@ -271,7 +271,7 @@ class _AddPostThirdState extends State<AddPostThird> {
                           },
                           height: 50,
                           minWidth: 90,
-                          color: const Color.fromRGBO(166, 38, 38, 1),
+                          color: const Color.fromRGBO(0, 95, 186, 1),
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4)),

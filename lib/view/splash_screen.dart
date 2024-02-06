@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'main_screen.dart';
 
@@ -34,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset('assets/images/logo.svg',height: 130,),
+                    Image.asset('assets/images/logo2.png',height: 130,),
                     const SizedBox(height: 30,),
                   ],
                 ),
@@ -43,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     right: 0,
                     left: 0,
                     child: SpinKitThreeBounce(
-                      color: Color.fromRGBO(166, 38, 38, 1),
+                      color: Color.fromRGBO(0, 95, 186, 1),
                       size: 30,
                     ),)
               ],
@@ -53,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
                  Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset('assets/images/logo.svg',height: 130,),
+                    Image.asset('assets/images/logo2.png',height: 130,),
                     const SpinKitThreeBounce(
                       color: Color.fromRGBO(0, 0, 0, 0),
                       size: 30,
@@ -73,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         children: [
                           Icon(
                               CupertinoIcons.refresh_thick,
-                              color: Color.fromRGBO(166, 38, 38, 1),
+                              color: Color.fromRGBO(0, 95, 186, 1),
                               size: 29
                           ),
                           SizedBox(
@@ -85,7 +84,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                 fontFamily: "irs",
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
-                                color: Color.fromRGBO(166, 38, 38, 1)),
+                                color: Color.fromRGBO(0, 95, 186, 1)),
                           )
                         ],
                       ),
