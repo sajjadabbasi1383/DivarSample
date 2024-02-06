@@ -5,7 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+
+  final bool fromCategory;
+  final String id;
+  final String titleName;
+
+
+  const HomeScreen(this.fromCategory, this.id,this.titleName, {super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -24,11 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "دیوار آگهی ها",
-          style: TextStyle(
+        title:  Text(
+          widget.titleName,
+          style: const TextStyle(
               fontFamily: 'irs',
-              fontSize: 20,
+              fontSize: 18,
               color: Colors.black,
               fontWeight: FontWeight.bold),
         ),
@@ -44,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: 20,
                 child: Icon(Icons.refresh,color: Colors.black87,))),
         backgroundColor: Colors.grey[100],
-        elevation: 5,
+        elevation: 4,
       ),
       body: listAds.length == 0
           ? const Center(
@@ -63,8 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: listAds.length,
               itemBuilder: (context, index) {
                 return Card(
-                  margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  elevation: 6,
+                  margin: index==0? const EdgeInsets.fromLTRB(12, 9, 12, 8)
+                  : const EdgeInsets.fromLTRB(12, 0, 12, 10),
+                  elevation: 4,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12))),
                   child: SizedBox(
@@ -233,7 +240,16 @@ class _HomeScreenState extends State<HomeScreen> {
             tmp['description'],
             tmp['status'],
             tmp['user']);
-        listAds.add(product);
+
+        if(widget.fromCategory==false){
+          listAds.add(product);
+        }else{
+          if(tmp['category']==widget.id){
+            listAds.add(product);
+          }
+        }
+
+
       }
 
       debugPrint("listSize: ${listAds.length}");

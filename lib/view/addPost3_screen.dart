@@ -3,9 +3,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:divar/view/addPost_screen.dart';
-import 'package:divar/view/home_screen.dart';
 import 'package:divar/view/main_screen.dart';
-import 'package:divar/view/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';

@@ -1,4 +1,6 @@
+import 'package:divar/view/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../Model/category_model.dart';
 
@@ -45,7 +47,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
               child: Card(
                 elevation: 2,
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    String catId=(index+1).toString();
+                    PersistentNavBarNavigator.pushDynamicScreen(
+                      context,
+                      screen: MaterialPageRoute(builder: (context) => HomeScreen(true, catId,"آگهی های مرتبط با ${listCategory[index].title}"),),
+                      withNavBar: true,
+                      //pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                    );
+                    //navController.jumpToTab(0);
+                  },
                   child: SizedBox(
                     height: 60,
                     child: Center(
@@ -53,7 +64,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         leading: Icon(listCategory[index].icon,size: 32,),
                         title: Text(listCategory[index].title,style: const TextStyle(
                             fontFamily: 'irs',
-                            fontSize: 16,
+                            fontSize: 15,
                             color: Colors.black,
                             fontWeight: FontWeight.bold
                         ),

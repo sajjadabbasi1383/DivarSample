@@ -45,7 +45,7 @@ class _MainScreenState extends State<MainScreen> {
           context,
           controller: navController,
           screens: const [
-            HomeScreen(),
+            HomeScreen(false,"","دیوار آگهی ها"),
             CategoryScreen(),
             AddPostScreen(),
             ProfileScreen(),
