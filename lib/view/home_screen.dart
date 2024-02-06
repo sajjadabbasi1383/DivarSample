@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: 20,
                 child: Icon(Icons.refresh,color: Colors.black87,))),
         backgroundColor: Colors.grey[100],
-        elevation: 4,
+        elevation: 3,
       ),
       body: listAds.length == 0
           ? const Center(
@@ -77,9 +77,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: SizedBox(
                     height: 160,
                     child: Row(
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8),
@@ -137,81 +137,82 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                         Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 11),
-                              child: Text(
-                                listAds[index].title,
-                                textDirection: TextDirection.rtl,
-                                style: const TextStyle(
-                                    fontFamily: 'irs',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            const Text(
-                              "در حد نو",
-                              textDirection: TextDirection.rtl,
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black54,
-                                  fontFamily: 'irs'),
-                            ),
-                            const SizedBox(
-                              height: 3,
-                            ),
-                             Row(
-                              children: [
-                                Text(
-                                  "${listAds[index].price} ",
+                         Padding(
+                           padding: const EdgeInsets.only(right: 15),
+                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 11),
+                                child: Text(
+                                  listAds[index].title,
                                   textDirection: TextDirection.rtl,
                                   style: const TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black54,
-                                      fontFamily: 'irs'),
+                                      fontFamily: 'irs',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
                                 ),
-                                const Text(
-                                  "تومان",
-                                  textDirection: TextDirection.rtl,
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black54,
-                                      fontFamily: 'irs'),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 3,
-                            ),
-                             Row(
-                              children: [
-                                const Text("لحظاتی پیش در",
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        color: Colors.black54,
-                                        fontFamily: 'irs')),
-                                const SizedBox(
-                                  width: 3,
-                                ),
-                                Text(listAds[index].address,
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              const Text(
+                                "در حد نو",
+                                textDirection: TextDirection.rtl,
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black54,
+                                    fontFamily: 'irs'),
+                              ),
+                              const SizedBox(
+                                height: 3,
+                              ),
+                               Row(
+                                children: [
+                                  Text(
+                                    "${listAds[index].price} ",
+                                    textDirection: TextDirection.rtl,
                                     style: const TextStyle(
-                                        fontSize: 13,
+                                        fontSize: 14,
                                         color: Colors.black54,
-                                        fontFamily: 'irs')),
-                              ],
-                            ),
-                          ],
+                                        fontFamily: 'irs'),
+                                  ),
+                                  const Text(
+                                    "تومان",
+                                    textDirection: TextDirection.rtl,
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.black54,
+                                        fontFamily: 'irs'),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 3,
+                              ),
+                               Row(
+                                children: [
+                                  const Text("لحظاتی پیش در",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.black54,
+                                          fontFamily: 'irs')),
+                                  const SizedBox(
+                                    width: 3,
+                                  ),
+                                  Text(listAds[index].address,
+                                      style: const TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.black54,
+                                          fontFamily: 'irs')),
+                                ],
+                              ),
+                            ],
                         ),
+                         ),
+
                       ],
                     ),
                   ),

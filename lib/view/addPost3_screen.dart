@@ -207,7 +207,7 @@ class _AddPostThirdState extends State<AddPostThird> {
                           borderRadius: BorderRadius.all(Radius.circular(6)),
                           borderSide: BorderSide(
                               width: 1.5,
-                              color: Color.fromRGBO(166, 38, 38, 0.7))),
+                              color: Color.fromARGB(130,166, 38, 38))),
                       focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(6)),
                           borderSide: BorderSide(
